@@ -514,14 +514,14 @@ function httpGet(string $url, string $cachePath, string $type = 'html', array $a
 	$limits = FreshRSS_Context::systemConf()->limits;
 	$feed_timeout = empty($attributes['timeout']) || !is_numeric($attributes['timeout']) ? 0 : intval($attributes['timeout']);
 
-	$cacheMtime = @filemtime($cachePath);
-	if ($cacheMtime !== false && $cacheMtime > time() - intval($limits['cache_duration'])) {
-		$body = @file_get_contents($cachePath);
-		if ($body != false) {
-			syslog(LOG_DEBUG, 'FreshRSS uses cache for ' . \SimplePie\Misc::url_remove_credentials($url));
-			return $body;
-		}
-	}
+	// $cacheMtime = @filemtime($cachePath);
+	// if ($cacheMtime !== false && $cacheMtime > time() - intval($limits['cache_duration'])) {
+	// 	$body = @file_get_contents($cachePath);
+	// 	if ($body != false) {
+	// 		syslog(LOG_DEBUG, 'FreshRSS uses cache for ' . \SimplePie\Misc::url_remove_credentials($url));
+	// 		return $body;
+	// 	}
+	// }
 
 	if (mt_rand(0, 30) === 1) {	// Remove old entries once in a while
 		cleanCache(CLEANCACHE_HOURS);
